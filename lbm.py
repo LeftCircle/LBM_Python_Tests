@@ -1,13 +1,17 @@
 import numpy as np
+import matplotlib
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
+
+
 
 c_s = 1.0 / np.sqrt(3.0)
 print(c_s)
 one_over_cs_squared = 1.0 / (c_s**2)
 one_over_cs_fourth = one_over_cs_squared**2
 dt = 1.0
-tau = 1.0
+tau = 0.9
 
 weights = np.array([
 	4.0 / 9.0,
@@ -107,28 +111,6 @@ def lbm_step():
 
 # --------------------------------------------------------------------------
 # NOTE -> Visualization stff from claude
-
-# def run_and_animate(n_steps=20):
-# 	fig, axes = plt.subplots(1, 2, figsize=(10, 5))
-# 	x, y = np.meshgrid(np.arange(nx), np.arange(ny), indexing='ij')
-
-# 	def update(frame):
-# 		lbm_step()
-
-# 		axes[0].clear()
-# 		axes[0].imshow(densities.T, origin='lower', cmap='viridis',
-# 						vmin=0.9, vmax=1.1)  # fix color scale so it's comparable across frames
-# 		axes[0].set_title(f'Density (step {frame})')
-
-# 		axes[1].clear()
-# 		axes[1].quiver(x, y, ux, uy, scale=1)
-# 		axes[1].set_xlim(-0.5, nx - 0.5)
-# 		axes[1].set_ylim(-0.5, ny - 0.5)
-# 		axes[1].set_aspect('equal')
-# 		axes[1].set_title(f'Velocity (step {frame})')
-
-# 	anim = FuncAnimation(fig, update, frames=n_steps, interval=300, repeat=False)
-# 	anim.save('imgs/lbm_output.gif', writer='pillow', fps=3)
 
 def run_and_animate(n_steps=100, vmin=0.0, vmax=1.0):
     fig, ax = plt.subplots(figsize=(6, 6))

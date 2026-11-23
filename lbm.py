@@ -155,9 +155,9 @@ def save_image_sequence(n_steps=50, vmin=0.0, vmax=1.0):
 
 def main():
 	init()
-	save_image_sequence(16)
+	#save_image_sequence(16)
 	#print(densities)
-	#run_and_animate(50)
+	run_and_animate(50)
 
 
 

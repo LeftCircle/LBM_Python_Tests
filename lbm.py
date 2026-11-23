@@ -97,6 +97,7 @@ def lbm_step():
 	# collision
 	for j in range(ny):
 			for i in range(nx):
+# --------------------------------------------------------------------------
 				for k in range(9):
 					fstar[i][j][k] = get_fstar(fis[i][j][k], feq[i][j][k])
 
@@ -128,12 +129,35 @@ def run_and_animate(n_steps=100, vmin=0.0, vmax=1.0):
     anim.save('diffusion.gif', writer='pillow', fps=10)
     print("Saved to diffusion.gif")
 # --------------------------------------------------------------------------
+# img saving from chatgpt
+from pathlib import Path
 
+def save_image_sequence(n_steps=50, vmin=0.0, vmax=1.0):
+    output_dir = Path("images")
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    fig, ax = plt.subplots(figsize=(6, 6))
+    im = ax.imshow(
+        densities.T, origin="lower", cmap="viridis",
+        vmin=vmin, vmax=vmax,
+    )
+    fig.colorbar(im, ax=ax)
+    title = ax.set_title("")
+
+    for step in range(1, n_steps + 1):
+        lbm_step()
+        im.set_data(densities.T)
+        title.set_text(f"Density (step {step})")
+        fig.savefig(output_dir / f"diffusion_{step:04d}.png")
+
+    plt.close(fig)
+# --------------------------------------------------------------------------
 
 def main():
 	init()
+	save_image_sequence(16)
 	#print(densities)
-	run_and_animate(50)
+	#run_and_animate(50)
 
 
 

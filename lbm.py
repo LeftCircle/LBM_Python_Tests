@@ -97,7 +97,6 @@ def lbm_step():
 	# collision
 	for j in range(ny):
 			for i in range(nx):
-# --------------------------------------------------------------------------
 				for k in range(9):
 					fstar[i][j][k] = get_fstar(fis[i][j][k], feq[i][j][k])
 
